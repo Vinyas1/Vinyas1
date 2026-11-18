@@ -10,7 +10,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=for-the-badge&logo=typescript&logoColor=58a6ff)
 ![Docker](https://img.shields.io/badge/Docker-0d1117?style=for-the-badge&logo=docker&logoColor=58a6ff)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-0d1117?style=for-the-badge&logo=kubernetes&logoColor=58a6ff)
-![Azure](https://img.shields.io/badge/Microsoft_Azure-0d1117?style=for-the-badge&logo=microsoftazure&logoColor=0078d4)
+![Azure](https://img.shields.io/badge/Azure-0d1117?style=for-the-badge&logo=azure&logoColor=58a6ff)
 ![MongoDB](https://img.shields.io/badge/MongoDB-0d1117?style=for-the-badge&logo=mongodb&logoColor=39d353)
 ![Redis](https://img.shields.io/badge/Redis-0d1117?style=for-the-badge&logo=redis&logoColor=ff6b6b)
 ![Terraform](https://img.shields.io/badge/Terraform-0d1117?style=for-the-badge&logo=terraform&logoColor=58a6ff)
