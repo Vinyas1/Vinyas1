@@ -32,8 +32,4 @@
 
 ---
 
-<div align="center">
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=0:39d353,50:26a641,100:010409&height=100&section=footer)
-
-</div>
