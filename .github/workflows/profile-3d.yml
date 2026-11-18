@@ -35,44 +35,60 @@ jobs:
               "outputDir": "profile-3d-contrib"
             }
 
-      - name: Patch all light colors to dark
+      - name: Dump unique fill colors from SVG for debugging
+        run: |
+          grep -oP 'fill\s*=\s*"[^"]*"' profile-3d-contrib/*.svg | \
+            grep -oP '#[0-9a-fA-F]{3,6}|rgb[^"]*' | \
+            sort | uniq
+          echo "---"
+          grep -oP 'stop-color\s*:\s*[^;\"]+' profile-3d-contrib/*.svg | sort | uniq
+
+      - name: Replace ALL light colors brute force
         run: |
           python3 - <<'EOF'
 import glob, re
-
-# Light colors the action outputs for empty cells / floor / bg
-REPLACEMENTS = {
-    "#ebedf0": "#161b22",  # empty cell top
-    "#d1d9e0": "#21262d",  # empty cell left face
-    "#c8d1d9": "#1c2128",  # empty cell right face
-    "#ffffff": "#0d1117",  # background
-    "#fff":    "#0d1117",
-    "white":   "#0d1117",
-    "#f6f8fa": "#0d1117",  # github light bg
-    "#24292e": "#c9d1d9",  # keep dark text visible — skip
-}
 
 for path in glob.glob("profile-3d-contrib/*.svg"):
     with open(path, "r", encoding="utf-8") as f:
         svg = f.read()
 
-    # Replace empty cell colors (floor tiles)
-    svg = svg.replace("#ebedf0", "#161b22")
-    svg = svg.replace("#d1d9e0", "#21262d")
-    svg = svg.replace("#c8d1d9", "#1c2128")
-    svg = svg.replace("#f0f0f0", "#161b22")
-    svg = svg.replace("#e0e0e0", "#21262d")
+    # Dump all unique colors first (will show in Actions log)
+    colors = set(re.findall(r'#[0-9a-fA-F]{3,8}', svg))
+    print(f"\nAll colors in {path}:")
+    for c in sorted(colors):
+        print(f"  {c}")
 
-    # Replace white backgrounds — only as fill/style values, not inside text
-    svg = re.sub(r'(fill\s*=\s*["\'])#(?:fff|ffffff)(["\'])', r'\g<1>#0d1117\g<2>', svg, flags=re.IGNORECASE)
-    svg = re.sub(r'(fill\s*=\s*["\'])white(["\'])', r'\g<1>#0d1117\g<2>', svg, flags=re.IGNORECASE)
-    svg = re.sub(r'(background(?:-color)?\s*:\s*)#(?:fff|ffffff)\b', r'\g<1>#0d1117', svg, flags=re.IGNORECASE)
-    svg = re.sub(r'(background(?:-color)?\s*:\s*)white\b', r'\g<1>#0d1117', svg, flags=re.IGNORECASE)
-    svg = svg.replace("#f6f8fa", "#0d1117")
+    # Nuclear option — replace every light-ish hex color
+    def is_light(hex_color):
+        h = hex_color.lstrip('#')
+        if len(h) == 3:
+            h = ''.join(c*2 for c in h)
+        if len(h) != 6:
+            return False
+        r, g, b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
+        luminance = 0.299*r + 0.587*g + 0.114*b
+        return luminance > 100  # anything brighter than mid-grey
+
+    def replace_light(match):
+        color = match.group(0)
+        if is_light(color):
+            # keep greens as-is, only replace greys/whites
+            h = color.lstrip('#')
+            if len(h) == 3: h = ''.join(c*2 for c in h)
+            if len(h) == 6:
+                r,g,b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
+                # if green dominates, keep it
+                if g > r * 1.2 and g > b * 1.2:
+                    return color
+            return "#161b22"
+        return color
+
+    svg = re.sub(r'#[0-9a-fA-F]{6}', replace_light, svg)
+    svg = re.sub(r'#[0-9a-fA-F]{3}\b', replace_light, svg)
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"Patched: {path}")
+    print(f"Done: {path}")
 EOF
 
       - name: Commit and push
