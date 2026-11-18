@@ -32,9 +32,24 @@ jobs:
               "dotColor": "#39d353",
               "skyColor": "#0d1117",
               "isAnimated": true,
-              "animationDelay": 2,
               "outputDir": "profile-3d-contrib"
             }
+
+      - name: Force dark background on SVG
+        run: |
+          for f in profile-3d-contrib/*.svg; do
+            # replace any white or light background rect with dark
+            sed -i 's/fill="#ffffff"/fill="#0d1117"/gi' "$f"
+            sed -i 's/fill="#fff"/fill="#0d1117"/gi' "$f"
+            sed -i 's/fill="white"/fill="#0d1117"/gi' "$f"
+            sed -i 's/background:#ffffff/background:#0d1117/gi' "$f"
+            sed -i 's/background:#fff/background:#0d1117/gi' "$f"
+            sed -i 's/background: #ffffff/background: #0d1117/gi' "$f"
+            sed -i 's/background: white/background: #0d1117/gi' "$f"
+            # also patch any style block color tokens
+            sed -i 's/#f6f8fa/#0d1117/gi' "$f"
+            sed -i 's/#ffffff/#0d1117/gi' "$f"
+          done
 
       - name: Commit and push
         run: |
