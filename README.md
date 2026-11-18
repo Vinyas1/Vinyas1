@@ -8,16 +8,7 @@
 
 ---
 
-```bash
-$ whoami
-  Vinyas K · B.Tech CSE · Mysuru
 
-$ cat stack.txt
-  Backend  → Python · Django · REST · PostgreSQL · Redis
-  Frontend → React · TypeScript · Tailwind
-  DevOps   → Docker · Kubernetes · Azure · GitHub Actions
-  AI/ML    → LangGraph · DeepSeek · LangChain · InsightFace
-```
 
 ---
 
@@ -46,16 +37,4 @@ $ cat stack.txt
 
 ---
 
-<div align="center">
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=Vinyas1&theme=darkhub&no-frame=true&no-bg=true&margin-w=8&column=6)](https://github.com/Vinyas1)
-
-</div>
-
----
-
-<div align="center">
-
-![footer](https://capsule-render.vercel.app/api?type=waving&color=0:39d353,50:26a641,100:010409&height=100&section=footer)
-
-</div>
