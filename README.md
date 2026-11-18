@@ -11,25 +11,6 @@
 ---
 
 <!-- ABOUT — TERMINAL STYLE -->
-```bash
-$ whoami
-  Vinyas K — B.Tech CSE @ VCE Mysore | CGPA 9.02
-
-$ cat skills.txt
-  Backend  → Python · Django · REST · PostgreSQL · Redis
-  Frontend → React · TypeScript · Tailwind · Next.js
-  DevOps   → Docker · Kubernetes · Azure · GitHub Actions
-  AI/ML    → LangGraph · DeepSeek · LangChain · InsightFace
-
-$ cat achievements.txt
-  🏆  Unstop Fest 2026 — Winner
-  🚀  SIH 2025         — Finalist
-  💼  Wipro            — Software Intern
-  🎓  CGPA             — 9.02 / 10
-
-$ echo $STATUS
-  > Open to opportunities · Building in public · Always learning
-```
 
 ---
 
