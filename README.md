@@ -2,7 +2,7 @@
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:010409,50:0e4429,100:39d353&height=180&section=header&text=Vinyas%20K&fontSize=65&fontColor=ffffff&fontAlignY=42&animation=fadeIn)
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&duration=3500&pause=1200&color=39D353&center=true&vCenter=true&width=440&lines=Always+shipping+%E2%9A%A1)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=20&duration=3500&pause=1200&color=39D353&center=true&vCenter=true&width=440&lines=%E2%9A%A1)](https://git.io/typing-svg)
 
 </div>
 
