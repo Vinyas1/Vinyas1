@@ -1,0 +1,44 @@
+name: GitHub 3D Contribution Graph
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # runs daily at 2am UTC
+  workflow_dispatch:        # manual trigger button in Actions tab
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Generate Isometric 3D Contribution Graph
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate 3D Contribution Calendar
+        uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+        with:
+          SETTING_JSON: |
+            {
+              "githubUserName": "Vinyas1",
+              "type": "isometric",
+              "backgroundColor": "#010409",
+              "strongColor": "#39d353",
+              "mediumColor": "#26a641",
+              "lightColor": "#0e4429",
+              "emptyColor": "#161b22",
+              "dotColor": "#39d353",
+              "skyColor": "#0d1117",
+              "isAnimated": true
+            }
+
+      - name: Commit and push updated graph
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update 3D contribution graph [skip ci]"
+          git push
