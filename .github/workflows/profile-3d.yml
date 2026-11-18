@@ -35,20 +35,47 @@ jobs:
               "outputDir": "profile-3d-contrib"
             }
 
-      - name: Force dark background on SVG
+      - name: Fix background only — keep text visible
         run: |
           for f in profile-3d-contrib/*.svg; do
-            # replace any white or light background rect with dark
-            sed -i 's/fill="#ffffff"/fill="#0d1117"/gi' "$f"
-            sed -i 's/fill="#fff"/fill="#0d1117"/gi' "$f"
-            sed -i 's/fill="white"/fill="#0d1117"/gi' "$f"
-            sed -i 's/background:#ffffff/background:#0d1117/gi' "$f"
-            sed -i 's/background:#fff/background:#0d1117/gi' "$f"
-            sed -i 's/background: #ffffff/background: #0d1117/gi' "$f"
-            sed -i 's/background: white/background: #0d1117/gi' "$f"
-            # also patch any style block color tokens
-            sed -i 's/#f6f8fa/#0d1117/gi' "$f"
-            sed -i 's/#ffffff/#0d1117/gi' "$f"
+            # only replace background rect fills, not text colors
+            # target the first large rect which is the bg
+            python3 - <<'EOF'
+import re, sys, glob
+
+for path in glob.glob("profile-3d-contrib/*.svg"):
+    with open(path, "r", encoding="utf-8") as fh:
+        svg = fh.read()
+
+    # Replace only rect elements that have white/light fill (background rects)
+    # Match <rect ... fill="#ffffff" or fill="white" with large width/height
+    svg = re.sub(
+        r'(<rect\b[^>]*\b(?:width|height)\s*=\s*"(?:100%|[89]\d\d\d|[1-9]\d{3,})"[^>]*\bfill\s*=\s*")(?:#ffffff|#fff|white)(")',
+        r'\g<1>#0d1117\g<2>',
+        svg, flags=re.IGNORECASE
+    )
+    svg = re.sub(
+        r'(<rect\b[^>]*\bfill\s*=\s*")(?:#ffffff|#fff|white)("[^>]*\b(?:width|height)\s*=\s*"(?:100%|[89]\d\d\d|[1-9]\d{3,})")',
+        r'\g<1>#0d1117\g<2>',
+        svg, flags=re.IGNORECASE
+    )
+    # Also patch style="background:..." on root svg element
+    svg = re.sub(
+        r'(background\s*:\s*)(?:#ffffff|#fff|white)',
+        r'\g<1>#0d1117',
+        svg, flags=re.IGNORECASE
+    )
+    # Patch fill on the root <svg> element itself if it has a white fill
+    svg = re.sub(
+        r'(<svg\b[^>]*\bfill\s*=\s*")(?:#ffffff|#fff|white)(")',
+        r'\g<1>#0d1117\g<2>',
+        svg, flags=re.IGNORECASE
+    )
+
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(svg)
+    print(f"Patched: {path}")
+EOF
           done
 
       - name: Commit and push
