@@ -24,13 +24,13 @@ jobs:
             {
               "githubUserName": "Vinyas1",
               "type": "isometric",
-              "backgroundColor": "#010409",
+              "backgroundColor": "#0d1117",
               "strongColor": "#39d353",
               "mediumColor": "#26a641",
-              "lightColor": "#0e4429",
+              "lightColor": "#006d32",
               "emptyColor": "#161b22",
               "dotColor": "#39d353",
-              "skyColor": "#010409",
+              "skyColor": "#0d1117",
               "isAnimated": true,
               "outputDir": "profile-3d-contrib"
             }
