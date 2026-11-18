@@ -28,33 +28,16 @@ jobs:
               "strongColor": "#39d353",
               "mediumColor": "#26a641",
               "lightColor": "#006d32",
-              "emptyColor": "#161b22",
+              "emptyColor": "#1c2128",
               "dotColor": "#39d353",
               "skyColor": "#0d1117",
               "isAnimated": true,
               "outputDir": "profile-3d-contrib"
             }
 
-      - name: Inject solid dark background into SVG
+      - name: Show what colors are in the SVG
         run: |
-          python3 - <<'EOF'
-import glob, re
-
-for path in glob.glob("profile-3d-contrib/*.svg"):
-    with open(path, "r", encoding="utf-8") as f:
-        svg = f.read()
-
-    # inject a solid bg rect right after the opening <svg ...> tag
-    svg = re.sub(
-        r'(<svg\b[^>]*>)',
-        r'\1<rect width="100%" height="100%" fill="#0d1117"/>',
-        svg, count=1
-    )
-
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(svg)
-    print(f"Patched: {path}")
-EOF
+          grep -oP '#[0-9a-fA-F]{6}' profile-3d-contrib/profile-green-animate.svg | sort | uniq -c | sort -rn | head -30
 
       - name: Commit and push
         run: |
