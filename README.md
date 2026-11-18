@@ -1,13 +1,8 @@
-
 <div align="center">
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=0:010409,50:0e4429,100:39d353&height=160&section=header&text=Vinyas%20K&fontSize=65&fontColor=ffffff&fontAlignY=42&animation=fadeIn)
-
-</div>
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0e4429,100:39d353&height=200&section=header&text=Vinyas%20K&fontSize=70&fontColor=ffffff&fontAlignY=42&animation=fadeIn&descAlignY=60)
 
 ---
-
-<div align="center">
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=39d353)
 ![Django](https://img.shields.io/badge/Django-0d1117?style=for-the-badge&logo=django&logoColor=39d353)
@@ -20,16 +15,8 @@
 ![Redis](https://img.shields.io/badge/Redis-0d1117?style=for-the-badge&logo=redis&logoColor=ff6b6b)
 ![LangChain](https://img.shields.io/badge/LangChain-0d1117?style=for-the-badge&logo=chainlink&logoColor=39d353)
 
-</div>
-
 ---
 
-<div align="center">
+[![3D Graph](https://raw.githubusercontent.com/Vinyas1/Vinyas1/main/profile-3d-contrib/profile-green-animate.svg)](https://github.com/Vinyas1)
 
-![isometric](./isometric.svg)
-
-</div>
-
----
-
-
+![footer](https://capsule-render.vercel.app/api?type=waving&color=0:39d353,50:0e4429,100:0d1117&height=100&section=footer)
