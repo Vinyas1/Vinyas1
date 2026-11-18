@@ -8,16 +8,7 @@
 
 ---
 
-```bash
-$ whoami
-  Vinyas K · B.Tech CSE · Mysuru
 
-$ cat stack.txt
-  Backend  → Python · Django · REST · PostgreSQL · Redis
-  Frontend → React · TypeScript · Tailwind
-  DevOps   → Docker · Kubernetes · Azure · GitHub Actions
-  AI/ML    → LangGraph · DeepSeek · LangChain · InsightFace
-```
 
 ---
 
