@@ -32,64 +32,9 @@ jobs:
               "dotColor": "#39d353",
               "skyColor": "#0d1117",
               "isAnimated": true,
+              "animationDelay": 2,
               "outputDir": "profile-3d-contrib"
             }
-
-      - name: Dump unique fill colors from SVG for debugging
-        run: |
-          grep -oP 'fill\s*=\s*"[^"]*"' profile-3d-contrib/*.svg | \
-            grep -oP '#[0-9a-fA-F]{3,6}|rgb[^"]*' | \
-            sort | uniq
-          echo "---"
-          grep -oP 'stop-color\s*:\s*[^;\"]+' profile-3d-contrib/*.svg | sort | uniq
-
-      - name: Replace ALL light colors brute force
-        run: |
-          python3 - <<'EOF'
-import glob, re
-
-for path in glob.glob("profile-3d-contrib/*.svg"):
-    with open(path, "r", encoding="utf-8") as f:
-        svg = f.read()
-
-    # Dump all unique colors first (will show in Actions log)
-    colors = set(re.findall(r'#[0-9a-fA-F]{3,8}', svg))
-    print(f"\nAll colors in {path}:")
-    for c in sorted(colors):
-        print(f"  {c}")
-
-    # Nuclear option — replace every light-ish hex color
-    def is_light(hex_color):
-        h = hex_color.lstrip('#')
-        if len(h) == 3:
-            h = ''.join(c*2 for c in h)
-        if len(h) != 6:
-            return False
-        r, g, b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
-        luminance = 0.299*r + 0.587*g + 0.114*b
-        return luminance > 100  # anything brighter than mid-grey
-
-    def replace_light(match):
-        color = match.group(0)
-        if is_light(color):
-            # keep greens as-is, only replace greys/whites
-            h = color.lstrip('#')
-            if len(h) == 3: h = ''.join(c*2 for c in h)
-            if len(h) == 6:
-                r,g,b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
-                # if green dominates, keep it
-                if g > r * 1.2 and g > b * 1.2:
-                    return color
-            return "#161b22"
-        return color
-
-    svg = re.sub(r'#[0-9a-fA-F]{6}', replace_light, svg)
-    svg = re.sub(r'#[0-9a-fA-F]{3}\b', replace_light, svg)
-
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(svg)
-    print(f"Done: {path}")
-EOF
 
       - name: Commit and push
         run: |
