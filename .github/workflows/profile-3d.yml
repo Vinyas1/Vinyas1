@@ -44,20 +44,22 @@ jobs:
               with open(path, "r") as f:
                   svg = f.read()
 
-              # floor tiles (rgb format)
+              # floor tiles use rgb() format — patch these
               svg = svg.replace('fill="rgb(239, 239, 239)"', 'fill="#1c2128"')
               svg = svg.replace('fill="rgb(200, 200, 200)"', 'fill="#161b22"')
               svg = svg.replace('fill="rgb(167, 167, 167)"', 'fill="#0d1117"')
 
-              # catch remaining bright rgb greys
+              # also catch any remaining light rgb values broadly
               def darken_rgb(m):
                   r, g, b = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                  # if grey-ish and bright, darken it
                   if r > 100 and g > 100 and b > 100 and abs(r-g) < 30 and abs(g-b) < 30:
                       return 'fill="#1c2128"'
                   return m.group(0)
+
               svg = re.sub(r'fill="rgb\((\d+),\s*(\d+),\s*(\d+)\)"', darken_rgb, svg)
 
-              # text colors -> white
+              # text colors
               svg = svg.replace('"#444444"', '"#e6edf3"')
               svg = svg.replace('"#444"',    '"#e6edf3"')
               svg = svg.replace('"#111133"', '"#e6edf3"')
@@ -65,10 +67,6 @@ jobs:
               svg = svg.replace('"#000000"', '"#e6edf3"')
               svg = svg.replace('"#333333"', '"#e6edf3"')
               svg = svg.replace('"black"',   '"#e6edf3"')
-              svg = svg.replace('fill="gray"', 'fill="#e6edf3"')
-              svg = svg.replace('fill="#ffffff"', 'fill="#0d1117"')
-              svg = svg.replace("fill='#ffffff'", "fill='#0d1117'")
-              svg = svg.replace('fill="white"', 'fill="#0d1117"')
 
               with open(path, "w") as f:
                   f.write(svg)
