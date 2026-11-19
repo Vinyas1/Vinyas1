@@ -44,21 +44,22 @@ jobs:
               with open(path, "r") as f:
                   svg = f.read()
 
-              # floor tiles use rgb() format
+              # floor tiles use rgb() format — patch these
               svg = svg.replace('fill="rgb(239, 239, 239)"', 'fill="#1c2128"')
               svg = svg.replace('fill="rgb(200, 200, 200)"', 'fill="#161b22"')
               svg = svg.replace('fill="rgb(167, 167, 167)"', 'fill="#0d1117"')
 
-              # catch any remaining light rgb values broadly
+              # also catch any remaining light rgb values broadly
               def darken_rgb(m):
                   r, g, b = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                  # if grey-ish and bright, darken it
                   if r > 100 and g > 100 and b > 100 and abs(r-g) < 30 and abs(g-b) < 30:
                       return 'fill="#1c2128"'
                   return m.group(0)
 
               svg = re.sub(r'fill="rgb\((\d+),\s*(\d+),\s*(\d+)\)"', darken_rgb, svg)
 
-              # known dark text colors -> white
+              # text colors
               svg = svg.replace('"#444444"', '"#e6edf3"')
               svg = svg.replace('"#444"',    '"#e6edf3"')
               svg = svg.replace('"#111133"', '"#e6edf3"')
@@ -66,24 +67,6 @@ jobs:
               svg = svg.replace('"#000000"', '"#e6edf3"')
               svg = svg.replace('"#333333"', '"#e6edf3"')
               svg = svg.replace('"black"',   '"#e6edf3"')
-              svg = svg.replace('"#586069"', '"#e6edf3"')
-              svg = svg.replace('"#6a737d"', '"#e6edf3"')
-              svg = svg.replace('"#57606a"', '"#e6edf3"')
-              svg = svg.replace('"#8b949e"', '"#e6edf3"')
-              svg = svg.replace('"#767676"', '"#e6edf3"')
-
-              # catch-all: any hex grey too dark to read on #0d1117
-              def lighten_grey(m):
-                  hex_val = m.group(1)
-                  r = int(hex_val[0:2], 16)
-                  g = int(hex_val[2:4], 16)
-                  b = int(hex_val[4:6], 16)
-                  # grey-ish (channels similar) and dark (below brightness 180)
-                  if abs(r-g) < 20 and abs(g-b) < 20 and r < 180:
-                      return '"#e6edf3"'
-                  return m.group(0)
-
-              svg = re.sub(r'"#([0-9a-fA-F]{6})"', lighten_grey, svg)
 
               with open(path, "w") as f:
                   f.write(svg)
