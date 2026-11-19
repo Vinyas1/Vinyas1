@@ -35,7 +35,39 @@ jobs:
               "outputDir": "profile-3d-contrib"
             }
 
-      - name: Show what colors are in the SVG
+      - name: Force dark theme on SVG
+        run: |
+          python3 << 'EOF'
+          import glob
+
+          for path in glob.glob("profile-3d-contrib/*.svg"):
+              with open(path, "r") as f:
+                  svg = f.read()
+
+              # floor tiles
+              svg = svg.replace("#ebedf0", "#1c2128")
+              svg = svg.replace("#d1d9e0", "#161b22")
+              svg = svg.replace("#c8d1d9", "#0d1117")
+              svg = svg.replace("#f0f0f0", "#1c2128")
+              svg = svg.replace("#e8e8e8", "#1c2128")
+              svg = svg.replace("#d0d7de", "#161b22")
+              svg = svg.replace("#f6f8fa", "#0d1117")
+              # background
+              svg = svg.replace('"#ffffff"', '"#0d1117"')
+              svg = svg.replace('"#fff"',    '"#0d1117"')
+              # text
+              svg = svg.replace('"#24292e"', '"#e6edf3"')
+              svg = svg.replace('"#000000"', '"#e6edf3"')
+              svg = svg.replace('"#333"',    '"#e6edf3"')
+              svg = svg.replace('"#333333"', '"#e6edf3"')
+              svg = svg.replace('"black"',   '"#e6edf3"')
+
+              with open(path, "w") as f:
+                  f.write(svg)
+              print(f"Patched: {path}")
+          EOF
+
+      - name: Show colors in SVG
         run: |
           grep -oP '#[0-9a-fA-F]{6}' profile-3d-contrib/profile-green-animate.svg | sort | uniq -c | sort -rn | head -30
 
