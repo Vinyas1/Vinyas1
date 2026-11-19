@@ -66,6 +66,7 @@ jobs:
               svg = svg.replace('"#000000"', '"#e6edf3"')
               svg = svg.replace('"#333333"', '"#e6edf3"')
               svg = svg.replace('"black"',   '"#e6edf3"')
+              svg = svg.replace('fill="gray"', 'fill="#e6edf3"')
               svg = svg.replace('"#586069"', '"#e6edf3"')
               svg = svg.replace('"#6a737d"', '"#e6edf3"')
               svg = svg.replace('"#57606a"', '"#e6edf3"')
