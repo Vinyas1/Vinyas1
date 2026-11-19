@@ -52,10 +52,14 @@ jobs:
               svg = svg.replace("#e8e8e8", "#1c2128")
               svg = svg.replace("#d0d7de", "#161b22")
               svg = svg.replace("#f6f8fa", "#0d1117")
+              svg = svg.replace("#00000f", "#1c2128")
               # background
               svg = svg.replace('"#ffffff"', '"#0d1117"')
               svg = svg.replace('"#fff"',    '"#0d1117"')
-              # text
+              # text — make white
+              svg = svg.replace('"#444444"', '"#e6edf3"')
+              svg = svg.replace('"#444"',    '"#e6edf3"')
+              svg = svg.replace('"#111133"', '"#e6edf3"')
               svg = svg.replace('"#24292e"', '"#e6edf3"')
               svg = svg.replace('"#000000"', '"#e6edf3"')
               svg = svg.replace('"#333"',    '"#e6edf3"')
@@ -66,10 +70,6 @@ jobs:
                   f.write(svg)
               print(f"Patched: {path}")
           EOF
-
-      - name: Show colors in SVG
-        run: |
-          grep -oP '#[0-9a-fA-F]{6}' profile-3d-contrib/profile-green-animate.svg | sort | uniq -c | sort -rn | head -30
 
       - name: Commit and push
         run: |
