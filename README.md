@@ -3,8 +3,13 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0e4429,100:39d353&height=200&section=header&text=Vinyas%20K&fontSize=70&fontColor=ffffff&fontAlignY=42&animation=fadeIn&descAlignY=60)
 
 <img src="https://media.giphy.com/media/7j2hfyeVcDtf2/giphy.gif" width="40"/>
+<img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="40"/>
+<img src="https://media.giphy.com/media/7j2hfyeVcDtf2/giphy.gif" width="40"/>
 
 ---
+
+<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="40" align="left"/>
+<img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="40" align="right"/>
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=39d353)
 ![Django](https://img.shields.io/badge/Django-0d1117?style=for-the-badge&logo=django&logoColor=39d353)
@@ -18,11 +23,15 @@
 ![LangChain](https://img.shields.io/badge/LangChain-0d1117?style=for-the-badge&logo=chainlink&logoColor=39d353)
 
 <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="40"/>
+<img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="40"/>
+<img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="40"/>
 
 ---
 
 [![3D Graph](https://raw.githubusercontent.com/Vinyas1/Vinyas1/main/profile-3d-contrib/profile-green-animate.svg)](https://github.com/Vinyas1)
 
+<img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="40"/>
+<img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="40"/>
 <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="40"/>
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=0:39d353,50:0e4429,100:0d1117&height=100&section=footer)
