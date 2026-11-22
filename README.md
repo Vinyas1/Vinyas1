@@ -2,7 +2,7 @@
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0e4429,100:39d353&height=200&section=header&text=Vinyas%20K&fontSize=70&fontColor=ffffff&fontAlignY=42&animation=fadeIn&descAlignY=60)
 
-<img src="https://i.pinimg.com/736x/e6/09/a5/e609a509d26f97ae3eebb9876c7bb92c.jpg" width="70" height ="50"/>
+<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="70" height ="50"/>
 
 
 
