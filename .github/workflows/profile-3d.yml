@@ -44,22 +44,30 @@ jobs:
               with open(path, "r") as f:
                   svg = f.read()
 
-              # floor tiles use rgb() format — patch these
+              # floor tiles (rgb format)
               svg = svg.replace('fill="rgb(239, 239, 239)"', 'fill="#1c2128"')
               svg = svg.replace('fill="rgb(200, 200, 200)"', 'fill="#161b22"')
               svg = svg.replace('fill="rgb(167, 167, 167)"', 'fill="#0d1117"')
 
-              # also catch any remaining light rgb values broadly
+              # catch remaining bright rgb greys (floor tiles)
               def darken_rgb(m):
                   r, g, b = int(m.group(1)), int(m.group(2)), int(m.group(3))
-                  # if grey-ish and bright, darken it
                   if r > 100 and g > 100 and b > 100 and abs(r-g) < 30 and abs(g-b) < 30:
                       return 'fill="#1c2128"'
                   return m.group(0)
-
               svg = re.sub(r'fill="rgb\((\d+),\s*(\d+),\s*(\d+)\)"', darken_rgb, svg)
 
-              # text colors
+              # white/light backgrounds -> dark
+              svg = svg.replace('fill="#ffffff"', 'fill="#0d1117"')
+              svg = svg.replace("fill='#ffffff'", "fill='#0d1117'")
+              svg = svg.replace('fill="white"', 'fill="#0d1117"')
+              svg = svg.replace('fill="#FFFFFF"', 'fill="#0d1117"')
+              svg = svg.replace('fill="rgb(255, 255, 255)"', 'fill="#0d1117"')
+              # background rect specifically
+              svg = re.sub(r'(<rect[^>]*width="100%"[^>]*fill=")[^"]*(")', r'\1#0d1117\2', svg)
+              svg = re.sub(r'(<rect[^>]*fill=")[^"]*("[^>]*width="100%")', r'\1#0d1117\2', svg)
+
+              # text/label colors -> white
               svg = svg.replace('"#444444"', '"#e6edf3"')
               svg = svg.replace('"#444"',    '"#e6edf3"')
               svg = svg.replace('"#111133"', '"#e6edf3"')
@@ -67,6 +75,11 @@ jobs:
               svg = svg.replace('"#000000"', '"#e6edf3"')
               svg = svg.replace('"#333333"', '"#e6edf3"')
               svg = svg.replace('"black"',   '"#e6edf3"')
+              svg = svg.replace('fill="gray"', 'fill="#e6edf3"')
+              svg = svg.replace('"#586069"', '"#e6edf3"')
+              svg = svg.replace('"#6a737d"', '"#e6edf3"')
+              svg = svg.replace('"#57606a"', '"#e6edf3"')
+              svg = svg.replace('"#767676"', '"#e6edf3"')
 
               with open(path, "w") as f:
                   f.write(svg)
