@@ -45,11 +45,11 @@ jobs:
           for path in glob.glob("profile-3d-contrib/*.svg"):
               with open(path, "r") as f:
                   svg = f.read()
-
-              # floor tiles use rgb() format — patch these
-              svg = svg.replace('fill="rgb(239, 239, 239)"', 'fill="#1c2128"')
-              svg = svg.replace('fill="rgb(200, 200, 200)"', 'fill="#161b22"')
-              svg = svg.replace('fill="rgb(167, 167, 167)"', 'fill="#0d1117"')
+              # Floor tiles — restore original light colours
+              svg = svg.replace('fill="#1c2128"', 'fill="rgb(239, 239, 239)"')
+              svg = svg.replace('fill="#161b22"', 'fill="rgb(200, 200, 200)"')
+              svg = svg.replace('fill="#0d1117"', 'fill="rgb(167, 167, 167)"')
+              
 
               # also catch any remaining light rgb values broadly
               def darken_rgb(m):
