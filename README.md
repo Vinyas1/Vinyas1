@@ -3,7 +3,6 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0e4429,100:39d353&height=200&section=header&text=Vinyas%20K&fontSize=70&fontColor=ffffff&fontAlignY=42&animation=fadeIn&descAlignY=60)
 
 <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="40"/>
-<img src="https://media.giphy.com/media/7j2hfyeVcDtf2/giphy.gif" width="40"  align="left"/>
 
 
 ---
